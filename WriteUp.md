@@ -79,7 +79,7 @@ The parameter img_size contains the x and y dimensions of the first image in the
 ![result images](https://raw.githubusercontent.com/sorix6/CarND-Advanced-Lane-Lines/master/output_images/undistorted_color_warped.JPG)
 
 
-The methods used in the process of lane-line pixels are contained in the fole lane_detect.py.
+The methods used in the process of lane-line pixels are contained in the file lane_detect.py.
 
 The first step was to display the histogram for the input images:
 
