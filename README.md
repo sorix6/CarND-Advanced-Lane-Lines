@@ -1,19 +1,5 @@
-## Advanced Lane Finding
-[![Udacity - Self-Driving Car NanoDegree](https://s3.amazonaws.com/udacity-sdc/github/shield-carnd.svg)](http://www.udacity.com/drive)
 
-
-In this project, your goal is to write a software pipeline to identify the lane boundaries in a video, but the main output or product we want you to create is a detailed writeup of the project.  Check out the [writeup template](https://github.com/udacity/CarND-Advanced-Lane-Lines/blob/master/writeup_template.md) for this project and use it as a starting point for creating your own writeup.  
-
-Creating a great writeup:
----
-A great writeup should include the rubric points as well as your description of how you addressed each point.  You should include a detailed description of the code used in each step (with line-number references and code snippets where necessary), and links to other supporting documents or external references.  You should include images in your writeup to demonstrate how your code works with examples.  
-
-All that said, please be concise!  We're not looking for you to write a book here, just a brief description of how you passed each rubric point, and references to the relevant code :). 
-
-You're not required to use markdown for your writeup.  If you use another method please just submit a pdf of your writeup.
-
-The Project
----
+### Advanced Lane Finding Project
 
 The goals / steps of this project are the following:
 
@@ -26,14 +12,117 @@ The goals / steps of this project are the following:
 * Warp the detected lane boundaries back onto the original image.
 * Output visual display of the lane boundaries and numerical estimation of lane curvature and vehicle position.
 
-The images for camera calibration are stored in the folder called `camera_cal`.  The images in `test_images` are for testing your pipeline on single frames.  If you want to extract more test images from the videos, you can simply use an image writing method like `cv2.imwrite()`, i.e., you can read the video in frame by frame as usual, and for frames you want to save for later you can write to an image file.  
 
-To help the reviewer examine your work, please save examples of the output from each stage of your pipeline in the folder called `output_images`, and include a description in your writeup for the project of what each image shows.    The video called `project_video.mp4` is the video your pipeline should work well on.  
 
-The `challenge_video.mp4` video is an extra (and optional) challenge for you if you want to test your pipeline under somewhat trickier conditions.  The `harder_challenge.mp4` video is another optional challenge and is brutal!
+#### Camera Calibration
 
-If you're feeling ambitious (again, totally optional though), don't stop there!  We encourage you to go out and take video of your own, calibrate your camera and show us how you would implement this project from scratch!
+The camera calibration code can be found in the file calibration.py
+While using the images provided in the camera_cal folder I have taken the following steps:
+1. Each image has been converted to grayscale 
+2. Found the chessboard corners using the cv2.findChessboardCorners() function
+3. Found the calibration parameteres of the camera by using the information retrieved in step 2 and the cv2.calibrateCamera() function
+4. Saved the calibration parameters in the file data_exports/calibration.p
 
-## How to write a README
-A well written README file can enhance your project and portfolio.  Develop your abilities to create professional README files by completing [this free course](https://www.udacity.com/course/writing-readmes--ud777).
+By using the calibration parameters and the cv2.undistort() function, I have come to the following results:
 
+Original image | Corner detection | Undistorted image  
+------------ | ------------- | ------------- 
+![original image](https://raw.githubusercontent.com/sorix6/CarND-Advanced-Lane-Lines/master/camera_cal/calibration2.jpg) | ![carners image](https://raw.githubusercontent.com/sorix6/CarND-Advanced-Lane-Lines/master/outputs/corners_calibration2.jpg) | ![undistorted image](https://raw.githubusercontent.com/sorix6/CarND-Advanced-Lane-Lines/master/outputs/undist_calibration2.jpg)
+![original image](https://raw.githubusercontent.com/sorix6/CarND-Advanced-Lane-Lines/master/camera_cal/calibration9.jpg) | ![carners image](https://raw.githubusercontent.com/sorix6/CarND-Advanced-Lane-Lines/master/outputs/corners_calibration9.jpg) | ![originalundistortedcarners](https://raw.githubusercontent.com/sorix6/CarND-Advanced-Lane-Lines/master/outputs/undist_calibration9.jpg)
+![original image](https://raw.githubusercontent.com/sorix6/CarND-Advanced-Lane-Lines/master/camera_cal/calibration13.jpg) | ![carners image](https://raw.githubusercontent.com/sorix6/CarND-Advanced-Lane-Lines/master/outputs/corners_calibration13.jpg) | ![undistorted image](https://raw.githubusercontent.com/sorix6/CarND-Advanced-Lane-Lines/master/outputs/undist_calibration13.jpg)
+
+
+#### Pipeline (single images)
+
+By using the calibration parameters from the file data_exports/calibration.p, I came to the following results:
+
+Original image | Undistorted image  
+------------ | -------------
+![original image](https://raw.githubusercontent.com/sorix6/CarND-Advanced-Lane-Lines/master/test_images/straight_lines1.jpg) | ![undistorted image](https://raw.githubusercontent.com/sorix6/CarND-Advanced-Lane-Lines/master/outputs/undist_straight_lines1.jpg)
+![original image](https://raw.githubusercontent.com/sorix6/CarND-Advanced-Lane-Lines/master/test_images/straight_lines2.jpg) | ![undistorted image](https://raw.githubusercontent.com/sorix6/CarND-Advanced-Lane-Lines/master/outputs/undist_straight_lines2.jpg)
+![original image](https://raw.githubusercontent.com/sorix6/CarND-Advanced-Lane-Lines/master/test_images/test1.jpg) | ![undistorted image](https://raw.githubusercontent.com/sorix6/CarND-Advanced-Lane-Lines/master/outputs/undist_test1.jpg)
+![original image](https://raw.githubusercontent.com/sorix6/CarND-Advanced-Lane-Lines/master/test_images/test2.jpg) | ![undistorted image](https://raw.githubusercontent.com/sorix6/CarND-Advanced-Lane-Lines/master/outputs/undist_test2.jpg)
+![original image](https://raw.githubusercontent.com/sorix6/CarND-Advanced-Lane-Lines/master/test_images/test3.jpg) | ![undistorted image](https://raw.githubusercontent.com/sorix6/CarND-Advanced-Lane-Lines/master/outputs/undist_test3.jpg)
+![original image](https://raw.githubusercontent.com/sorix6/CarND-Advanced-Lane-Lines/master/test_images/test4.jpg) | ![undistorted image](https://raw.githubusercontent.com/sorix6/CarND-Advanced-Lane-Lines/master/outputs/undist_test4.jpg)
+![original image](https://raw.githubusercontent.com/sorix6/CarND-Advanced-Lane-Lines/master/test_images/test5.jpg) | ![undistorted image](https://raw.githubusercontent.com/sorix6/CarND-Advanced-Lane-Lines/master/outputs/undist_test5.jpg)
+![original image](https://raw.githubusercontent.com/sorix6/CarND-Advanced-Lane-Lines/master/test_images/test6.jpg) | ![undistorted image](https://raw.githubusercontent.com/sorix6/CarND-Advanced-Lane-Lines/master/outputs/undist_test6.jpg)
+
+
+In order to create a thresholded binary image, I have created the function my_pipeline() in the file gradient_color.py. The function contains the following steps:
+1. Converting to the HLS color space and separating the V channel
+2. Applying a Sobel operator on x and compute the absolute x derivate
+3. Create a threshold gradient on x
+4. Create a color channel threshold
+5. Stach the results of step 3. and step 4. in order to return the result
+
+
+The code for my perspective transform is available in iPython notebook. The parameters are defined in cell 2 and in cell 10, at line 10, the cv2.warpPerspective() function is called.
+
+I chose to hardcode the source and destination points in the following manner:
+
+```python
+src = np.float32([[[ 610,  450]], 
+                      [[ 680,  450]], 
+                      [[ img_size[0]-300,  680]],
+                      [[ 380,  680]]])
+
+# Result points        
+dst = np.float32([[offset, 0], 
+                [img_size[0]-offset, 0], 
+                [img_size[0]-offset, img_size[1]], 
+                [offset, img_size[1]]])
+
+```
+
+The parameter img_size contains the x and y dimensions of the first image in the batch of images.
+
+![result images](https://raw.githubusercontent.com/sorix6/CarND-Advanced-Lane-Lines/master/output_images/undistorted_color_warped.JPG)
+
+
+The methods used in the process of lane-line pixels are contained in the file lane_detect.py.
+
+The first step was to display the histogram for the input images:
+
+![histogram images](https://raw.githubusercontent.com/sorix6/CarND-Advanced-Lane-Lines/master/output_images/histograms.jpg)
+
+
+##### The method  find_lane_pixels:
+* Parameters
+Sliding windows: 9
+Width of the windows +/- margin: 100
+Minimum number of pixels found to recenter window: 50
+  
+1. Take a histogram of the bottom half of the image
+2. Create an output image to draw on and visualize the result
+3. Find the peak of the left and right halves of the histogram
+4. Set height of windows - based on nwindows above and image shape
+5. Identify the x and y positions of all nonzero pixels in the image
+6. Step through the windows one by on, identify the nonzero pixels in x and y within the window and draw the windows on the visualization image
+7. Extract left and right line pixel positions and fit a second order polynomial to each using np.polyfit()
+8. Generate the values of x and y needed for plotting
+
+##### The method search_around_poly:
+* Parameters
+Margin: 100
+
+1. Grab activated pixels
+2. Set the area of search based on activated x-values within the +/- margin of the polynomial function
+3. Extract left and right line pixel positions
+4. Fit new polynomials
+5. Draw the image with the relevant new information
+
+![lanes](https://raw.githubusercontent.com/sorix6/CarND-Advanced-Lane-Lines/master/output_images/window_lanes.JPG)
+
+
+The curvatures have been calculated using the method measure() from the file curvature.py. The curvature information has been displayed on the same image that displayes the detected lane.
+
+---
+
+### Pipeline (video)
+
+The result of applying the pipeline to the video project_video.mp4 can be found in the folder video_results.
+
+### Discussion
+
+The pipeline does not perform very well on the two challenge videos. More tunning is in need in order to fix this issue. 
+The problems seem to appear due to the different colors of the pavement. Changes in the method that generates the thresholded binary should improve the results.
