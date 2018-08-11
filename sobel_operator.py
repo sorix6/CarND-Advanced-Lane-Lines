@@ -61,14 +61,14 @@ def dir_threshold(gray, sobel_kernel=3, thresh=(0, np.pi/2)):
 	
 def combine_thresholds(image):
 	# Choose a Sobel kernel size
-	ksize = 5 # Choose a larger odd number to smooth gradient measurements
+	ksize = 7 # Choose a larger odd number to smooth gradient measurements
 	
 	# Convert to grayscale
 	gray = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)
 	
 	# Apply each of the thresholding functions
-	gradx = abs_sobel_thresh(gray, orient='x', thresh_min=10, thresh_max=180)
-	grady = abs_sobel_thresh(gray, orient='y', thresh_min=10, thresh_max=180)
+	gradx = abs_sobel_thresh(gray, orient='x', thresh_min=10, thresh_max=160)
+	grady = abs_sobel_thresh(gray, orient='y', thresh_min=10, thresh_max=160)
 	mag_binary = mag_thresh(gray, sobel_kernel=ksize)
 	dir_binary = dir_threshold(gray, sobel_kernel=ksize)
 	
