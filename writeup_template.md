@@ -39,7 +39,7 @@ Original image | Corner detection | Undistorted image
 Bu using the calibration parameters from the file data_exports/calibration.p, I came to the following results:
 
 Original image | Undistorted image  
------------- | ------------- | ------------- 
+------------ | -------------
 ![original image](https://raw.githubusercontent.com/sorix6/CarND-Advanced-Lane-Lines/master/test_images/straight_lines1.jpg) | ![original image](https://raw.githubusercontent.com/sorix6/CarND-Advanced-Lane-Lines/master/outputs/undist_straight_lines1.jpg)
 ![original image](https://raw.githubusercontent.com/sorix6/CarND-Advanced-Lane-Lines/master/test_images/straight_lines2.jpg) | ![original image](https://raw.githubusercontent.com/sorix6/CarND-Advanced-Lane-Lines/master/outputs/undist_straight_lines2.jpg)
 ![original image](https://raw.githubusercontent.com/sorix6/CarND-Advanced-Lane-Lines/master/test_images/test1.jpg) | ![original image](https://raw.githubusercontent.com/sorix6/CarND-Advanced-Lane-Lines/master/outputs/undist_test1.jpg)
