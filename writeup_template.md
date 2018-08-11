@@ -1,5 +1,5 @@
 
-**Advanced Lane Finding Project**
+### Advanced Lane Finding Project
 
 The goals / steps of this project are the following:
 
@@ -12,25 +12,16 @@ The goals / steps of this project are the following:
 * Warp the detected lane boundaries back onto the original image.
 * Output visual display of the lane boundaries and numerical estimation of lane curvature and vehicle position.
 
-[//]: # (Image References)
-
-[image1]: ./examples/undistort_output.png "Undistorted"
-[image2]: ./test_images/test1.jpg "Road Transformed"
-[image3]: ./examples/binary_combo_example.jpg "Binary Example"
-[image4]: ./examples/warped_straight_lines.jpg "Warp Example"
-[image5]: ./examples/color_fit_lines.jpg "Fit Visual"
-[image6]: ./examples/example_output.jpg "Output"
-[video1]: ./project_video.mp4 "Video"
 
 
-### Camera Calibration
+#### Camera Calibration
 
 The camera calibration code can be found in the file calibration.py
 While using the images provided in the camera_cal folder I have taken the following steps:
-* 1. Each image has been converted to grayscale 
-* 2. Found the chessboard corners using the cv2.findChessboardCorners() function
-* 3. Found the calibration parameteres of the camera by using the information retrieved in step 2 and the cv2.calibrateCamera() function
-* 4. Saved the calibration parameters in the file data_exports/calibration.p
+1. Each image has been converted to grayscale 
+2. Found the chessboard corners using the cv2.findChessboardCorners() function
+3. Found the calibration parameteres of the camera by using the information retrieved in step 2 and the cv2.calibrateCamera() function
+4. Saved the calibration parameters in the file data_exports/calibration.p
 
 By using the calibration parameters and the cv2.undistort() function, I have come to the following results:
 
@@ -41,12 +32,24 @@ Original image | Corner detection | Undistorted image
 ![original image](https://raw.githubusercontent.com/sorix6/CarND-Advanced-Lane-Lines/master/camera_cal/calibration13.jpg) | ![original image](https://raw.githubusercontent.com/sorix6/CarND-Advanced-Lane-Lines/master/outputs/corners_calibration13.jpg) | ![original image](https://raw.githubusercontent.com/sorix6/CarND-Advanced-Lane-Lines/master/outputs/undist_calibration13.jpg)
 
 
-### Pipeline (single images)
+#### Pipeline (single images)
 
 #### 1. Provide an example of a distortion-corrected image.
 
-To demonstrate this step, I will describe how I apply the distortion correction to one of the test images like this one:
-![alt text][image2]
+Bu using the calibration parameters from the file data_exports/calibration.p, I came to the following results:
+
+Original image | Undistorted image  
+------------ | ------------- | ------------- 
+![original image](https://raw.githubusercontent.com/sorix6/CarND-Advanced-Lane-Lines/master/test_images/straight_lines1.jpg) | ![original image](https://raw.githubusercontent.com/sorix6/CarND-Advanced-Lane-Lines/master/outputs/undist_straight_lines1.jpg)
+![original image](https://raw.githubusercontent.com/sorix6/CarND-Advanced-Lane-Lines/master/test_images/straight_lines2.jpg) | ![original image](https://raw.githubusercontent.com/sorix6/CarND-Advanced-Lane-Lines/master/outputs/undist_straight_lines2.jpg)
+![original image](https://raw.githubusercontent.com/sorix6/CarND-Advanced-Lane-Lines/master/test_images/test1.jpg) | ![original image](https://raw.githubusercontent.com/sorix6/CarND-Advanced-Lane-Lines/master/outputs/undist_test1.jpg)
+![original image](https://raw.githubusercontent.com/sorix6/CarND-Advanced-Lane-Lines/master/test_images/test2.jpg) | ![original image](https://raw.githubusercontent.com/sorix6/CarND-Advanced-Lane-Lines/master/outputs/undist_test2.jpg)
+![original image](https://raw.githubusercontent.com/sorix6/CarND-Advanced-Lane-Lines/master/test_images/test3.jpg) | ![original image](https://raw.githubusercontent.com/sorix6/CarND-Advanced-Lane-Lines/master/outputs/undist_test3.jpg)
+![original image](https://raw.githubusercontent.com/sorix6/CarND-Advanced-Lane-Lines/master/test_images/test4.jpg) | ![original image](https://raw.githubusercontent.com/sorix6/CarND-Advanced-Lane-Lines/master/outputs/undist_test4.jpg)
+![original image](https://raw.githubusercontent.com/sorix6/CarND-Advanced-Lane-Lines/master/test_images/test5.jpg) | ![original image](https://raw.githubusercontent.com/sorix6/CarND-Advanced-Lane-Lines/master/outputs/undist_test5.jpg)
+![original image](https://raw.githubusercontent.com/sorix6/CarND-Advanced-Lane-Lines/master/test_images/test6.jpg) | ![original image](https://raw.githubusercontent.com/sorix6/CarND-Advanced-Lane-Lines/master/outputs/undist_test6.jpg)
+
+
 
 #### 2. Describe how (and identify where in your code) you used color transforms, gradients or other methods to create a thresholded binary image.  Provide an example of a binary image result.
 
