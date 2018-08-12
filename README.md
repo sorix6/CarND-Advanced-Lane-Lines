@@ -114,7 +114,7 @@ Margin: 100
 ![lanes](https://raw.githubusercontent.com/sorix6/CarND-Advanced-Lane-Lines/master/output_images/window_lanes.JPG)
 
 
-The curvatures have been calculated using the method measure() from the file curvature.py. The curvature information has been displayed on the same image that displayes the detected lane.
+The curvatures have been calculated using the method measure() from the file curvature.py. The distance from the center of the lane has been computed using the method distance() from the same file.
 
 ---
 
